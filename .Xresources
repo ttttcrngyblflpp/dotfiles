@@ -1,0 +1,66 @@
+! Set DPI for HiDPI screen
+Xft.dpi: 144
+
+! text autohinting
+Xft.autohint: 0
+
+! one of: lcddefault, lcdlight, lcdlegacy, lcdnone
+Xft.lcdfilter: lcddefault
+
+! text hinting style, one of: hintnone, hintslight, hintmedium, hintfull
+Xft.hintstyle: hintfull
+
+! text hinting
+Xft.hinting: 1
+
+! text antialiasing
+Xft.antialias: 1
+
+! text subpixel rendering, one of: none, rgb, bgr, vrgb, vbgr
+Xft.rgba: rgb
+
+! xterm font
+xterm*faceName: Hack
+xterm*faceSize: 9
+xterm*boldFont: Hack-bold
+xterm*boldColors: false
+
+! xterm make alt normal
+xterm*metaSendsEscape: true
+
+! special
+*.foreground:   #eeeeee
+*.background:   #000000
+*.cursorColor:  #eeeeee
+
+! black
+*.color0:       #2d2d2d
+*.color8:       #747369
+
+! red
+*.color1:       #f2777a
+*.color9:       #f2777a
+
+! green
+*.color2:       #99cc99
+*.color10:      #99cc99
+
+! yellow
+*.color3:       #ffcc66
+*.color11:      #ffcc66
+
+! blue
+*.color4:       #6699cc
+*.color12:      #6699cc
+
+! magenta
+*.color5:       #cc99cc
+*.color13:      #cc99cc
+
+! cyan
+*.color6:       #66cccc
+*.color14:      #66cccc
+
+! white
+*.color7:       #aaaaaa
+*.color15:      #f2f0ec
