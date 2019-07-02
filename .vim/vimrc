@@ -11,3 +11,5 @@ set nocompatible
 " - auto-detect pasting (https://github.com/ConradIrwin/vim-bracketed-paste)
 filetype plugin indent on
 syntax on
+
+set number relativenumber
