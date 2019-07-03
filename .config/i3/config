@@ -5,6 +5,15 @@
 # this file and re-run i3-config-wizard(1).
 #
 
+# Disable window titlebars always
+for_window [class=".*"] border pixel 2
+
+# Set a gaps of 10 (outer gaps is unset because it's added to this)
+gaps inner 10
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #f58b54 #f58b54 #ffffff #ffffff   #f58b54
+
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
