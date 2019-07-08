@@ -17,3 +17,9 @@ $ cfg config --local status.showUntrackedFiles no     # don't show untracked fil
 $ cfg checkout                                        # checkout the files
 
 ```
+
+It's possible that the bare clone caused no tracking to be set up, if so run this:
+
+```
+$ cfg config --add remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+```
