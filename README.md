@@ -2,10 +2,10 @@
 
 ## Setting up on a new machine
 
-Add the following line to `.bashrc`:
+Run the following to set up an alias:
 
 ```
-alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+$ alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 ```
 
 Run the following:
