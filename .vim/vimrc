@@ -16,8 +16,15 @@ set number
 set relativenumber
 call plug#begin('~/.vim/plugged')
 Plug 'jlanzarotta/bufexplorer'
+Plug 'kien/ctrlp.vim'
 call plug#end()
 
 " bufexplorer options
 " show relative paths by default
 let g:bufExplorerShowRelativePath = 1
+
+" ctrlp options
+" activate the Ctrl+P map
+let g:ctrlp_map = '<c-p>'
+" larger max files
+let g:ctrlp_max_files = 100000
