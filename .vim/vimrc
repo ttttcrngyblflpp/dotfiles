@@ -17,3 +17,7 @@ set relativenumber
 call plug#begin('~/.vim/plugged')
 Plug 'jlanzarotta/bufexplorer'
 call plug#end()
+
+" bufexplorer options
+" show relative paths by default
+let g:bufExplorerShowRelativePath = 1
