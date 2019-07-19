@@ -12,11 +12,22 @@ set nocompatible
 filetype plugin indent on
 syntax on
 
+set cmdheight=2
+set completeopt-=preview
+set completeopt+=menuone
 set number
 set relativenumber
+
+>>>>>>> af45452... vim add rust, languageclient, mucomplete
 call plug#begin('~/.vim/plugged')
 Plug 'jlanzarotta/bufexplorer'
 Plug 'kien/ctrlp.vim'
+Plug 'rust-lang/rust.vim'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'lifepillar/vim-mucomplete'
 call plug#end()
 
 " bufexplorer options
@@ -28,3 +39,9 @@ let g:bufExplorerShowRelativePath = 1
 let g:ctrlp_map = '<c-p>'
 " larger max files
 let g:ctrlp_max_files = 100000
+
+" Language Client config
+let g:LanguageClient_serverCommands = {
+  \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+  \ }
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
