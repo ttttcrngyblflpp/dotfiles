@@ -15,10 +15,10 @@ syntax on
 set cmdheight=2
 set completeopt-=preview
 set completeopt+=menuone
+set hidden
 set number
 set relativenumber
 
->>>>>>> af45452... vim add rust, languageclient, mucomplete
 call plug#begin('~/.vim/plugged')
 Plug 'jlanzarotta/bufexplorer'
 Plug 'kien/ctrlp.vim'
