@@ -19,6 +19,9 @@ set hidden
 set number
 set relativenumber
 
+" XXX remove me
+colorscheme zellner
+
 call plug#begin('~/.vim/plugged')
 Plug 'jlanzarotta/bufexplorer'
 Plug 'kien/ctrlp.vim'
