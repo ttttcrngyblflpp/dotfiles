@@ -24,27 +24,26 @@ colorscheme zellner
 
 call plug#begin('~/.vim/plugged')
 Plug 'jlanzarotta/bufexplorer'
-Plug 'kien/ctrlp.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
 Plug 'lifepillar/vim-mucomplete'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " bufexplorer options
 " show relative paths by default
 let g:bufExplorerShowRelativePath = 1
 
-" ctrlp options
-" activate the Ctrl+P map
-let g:ctrlp_map = '<c-p>'
-" larger max files
-let g:ctrlp_max_files = 100000
-
 " Language Client config
 let g:LanguageClient_serverCommands = {
   \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
   \ }
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+
+" FZF config
+"let g:fzf_layout = { 'up': '~40%' }
+nnoremap <silent> <c-p> :Files<CR>
