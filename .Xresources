@@ -24,9 +24,9 @@ xterm*faceName: Hack
 xterm*faceSize: 9
 
 ! special
-*.foreground:   #ffffff
+*.foreground:   #e8eaed
 *.background:   #000000
-*.cursorColor:  #ffffff
+*.cursorColor:  #e8eaed
 
 ! black
 *.color0:       #2b2b2b
