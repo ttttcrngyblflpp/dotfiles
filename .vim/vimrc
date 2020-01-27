@@ -46,4 +46,8 @@ nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 
 " FZF config
 "let g:fzf_layout = { 'up': '~40%' }
-nnoremap <silent> <c-p> :Files<CR>
+command! -nargs=* -complete=dir F
+  \ call fzf#run({'sink': 'e', 'source': 'rg --files <args>', 'down': '40%'})
+command! -nargs=* -complete=dir H
+  \ call fzf#run({'sink': 'e', 'source': 'rg --files --hidden --no-ignore <args>', 'down': '40%'})
+nnoremap <silent> <c-p> :F<CR>
