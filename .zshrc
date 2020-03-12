@@ -1,5 +1,5 @@
-. ~/.bash_aliases
-
+alias ll='ls -l'
+alias cfg='git --work-tree ~/ --git-dir ~/.cfg'
 # Set up the prompt
 
 autoload -Uz promptinit
