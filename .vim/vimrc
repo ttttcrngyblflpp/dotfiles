@@ -25,13 +25,14 @@ colorscheme zellner
 call plug#begin('~/.vim/plugged')
 Plug 'jlanzarotta/bufexplorer'
 Plug 'rust-lang/rust.vim'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+"Plug 'autozimu/LanguageClient-neovim', {
+"    \ 'branch': 'next',
+"    \ 'do': 'bash install.sh',
+"    \ }
 Plug 'lifepillar/vim-mucomplete'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'neovim/nvim-lsp'
 call plug#end()
 
 " bufexplorer options
@@ -42,12 +43,17 @@ let g:bufExplorerShowRelativePath = 1
 let g:LanguageClient_serverCommands = {
   \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
   \ }
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+"nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 
 " FZF config
 "let g:fzf_layout = { 'up': '~40%' }
-command! -nargs=* -complete=dir F
-  \ call fzf#run({'sink': 'e', 'source': 'rg --files <args>', 'down': '40%'})
+if getcwd() =~ "/google/src/cloud/gongt/*"
+  let search_dirs = 'third_party/gvisor'
+else
+  let search_dirs = ''
+endif
+
+command! -bang -nargs=? -complete=dir F call fzf#vim#files(search_dirs, <bang>0)
 command! -nargs=* -complete=dir H
   \ call fzf#run({'sink': 'e', 'source': 'rg --files --hidden --no-ignore <args>', 'down': '40%'})
 nnoremap <silent> <c-p> :F<CR>
