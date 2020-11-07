@@ -1,0 +1,110 @@
+define-command -override eval-selection %{eval %reg[.]}
+alias global es eval-selection
+
+addhl global/ number-lines -relative
+addhl global/ wrap
+
+set-option global grepcmd 'rg -n --column'
+
+hook global ModuleLoaded tmux %{
+    alias global terminal tmux-terminal-window
+}
+
+hook global BufOpenFile .* editorconfig-load
+hook global BufNewFile .* editorconfig-load
+
+hook global WinSetOption filetype=markdown %{
+    set window autowrap_column 80
+    autowrap-enable
+}
+map global normal = '|fmt -w $kak_opt_autowrap_column<ret>'
+
+hook global WinSetOption filetype=rust %{
+    set-face window module default
+    set-face window function default+fg
+    set-face window variable default
+}
+
+def -override ranger %{
+    terminal sh -c "
+        ranger --choosefiles /tmp/kak_%val{client_pid}_ranger --selectfile %val{buffile}
+        kak -p %val{session} <<<""eval -client %val{client} $(sed 's/^/edit /' /tmp/kak_%val{client_pid}_ranger)""
+    "
+}
+map global user r ': ranger<ret>' -docstring 'select files in ranger'
+
+evaluate-commands %sh{
+    plugins="$kak_config/plugins"
+    mkdir -p "$plugins"
+    [ ! -e "$plugins/plug.kak" ] && \
+        git clone -q https://github.com/andreyorst/plug.kak.git "$plugins/plug.kak"
+    printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
+}
+plug "andreyorst/plug.kak" noload
+
+plug "andreyorst/smarttab.kak" defer smarttab %{
+    set-option global softtabstop 4
+} config %{
+    hook global WinSetOption filetype=.* expandtab
+    hook global WinSetOption filetype=go smarttab
+}
+
+plug "andreyorst/fzf.kak" config %{
+    map -docstring 'fzf-mode' global user f %{: fzf-mode<ret>}
+    map -docstring 'fzf hidden' global user F %{: fzf -fzf-impl %{FZF_DEFAULT_COMMAND='rg --files -uu' fzf} -kak-cmd %{edit -existing}<ret>}
+} defer fzf-file %{
+    set-option global fzf_file_command 'rg'
+} defer fzf %{
+    set-option global fzf_use_main_selection false
+    set-option global fzf_preview_pos 'up'
+}
+
+plug "delapouite/kakoune-buffers" config %{
+    map -docstring 'buffers' global user b ': enter-buffers-mode<ret>'
+    map -docstring 'buffers locked' global user B ': enter-user-mode -lock buffers<ret>'
+}
+
+plug "kak-lsp/kak-lsp" do %{
+    cargo install --locked --force --path .
+} config %{
+    map -docstring 'lsp' global user l %{: enter-user-mode lsp<ret>}
+
+    set-option global lsp_cmd %sh{
+        if [[ $PWD == /google/src/cloud/gongt/* ]]
+        then
+            echo $kak_opt_lsp_cmd -c ~/.config/kak-lsp/g3.toml
+        else
+            echo $kak_opt_lsp_cmd
+        fi
+    }
+}
+lsp-enable
+
+define-command -hidden ctrl-u 'exec -draft hGi<a-c>'
+define-command -hidden ctrl-k 'exec -draft <a-l><a-c>'
+define-command -hidden ctrl-w 'exec -draft b<a-c>'
+map global insert <c-q> '<esc>'
+map global insert <c-u> '<a-;>: ctrl-u<ret>'
+map global insert <c-k> '<a-;>: ctrl-k<ret>'
+map global insert <c-w> '<a-;>: ctrl-w<ret>'
+map global insert <c-b> '<a-;>h'
+map global insert <c-f> '<a-;>l'
+map global insert <c-a> '<a-;>gi'
+map global insert <c-e> '<a-;>gl<a-;>l'
+map global insert <a-b> '<a-;>b'
+map global insert <a-f> '<a-;>w<a-;>l'
+
+define-command -params 1 -client-completion show-on %{
+    evaluate-commands -client %arg{1} e %val{buffile} %val{cursor_line} %val{cursor_column}
+}
+alias global so show-on
+
+define-command -params 1 -client-completion -override swap-with %{
+    nop %sh{
+        # kak is grabbing mouse events and preventing copy/paste
+        kak -p $kak_session <<< "\
+            eval -client '$1' 'show-on $kak_client'
+            eval -client '$1' 'e $kak_buffile $kak_cursor_line $kak_cursor_column'"
+    }
+}
+alias global sw swap-with

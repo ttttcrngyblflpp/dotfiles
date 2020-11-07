@@ -1,0 +1,27 @@
+session_name: "${WD}"
+# before_script: kak -d -s "${WD}"
+windows:
+  - window_name: kak
+    panes:
+      - shell_command:
+        - kak -c "${WD}" -e 'rename-client c1'
+  - window_name: kak
+    panes:
+      - shell_command:
+        - kak -c "${WD}" -e 'rename-client c2'
+  - window_name: kak
+    panes:
+      - shell_command:
+        - kak -c "${WD}" -e 'rename-client c3'
+  - window_name: rg
+    panes:
+      - null
+  - window_name: build
+    panes:
+      - null
+  - window_name: test
+    panes:
+      - null
+  - window_name: vcs
+    panes:
+      - null

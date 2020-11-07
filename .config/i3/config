@@ -5,14 +5,78 @@
 # this file and re-run i3-config-wizard(1).
 #
 
-bindsym $mod+Mod1+minus move scratchpad
-bindsym $mod+minus scratchpad show
+# lock
+bindsym $mod+$mod3+l exec i3lock -c 000000
+
+bindsym $mod+$mod2+$mod3+a exec setxkbmap -device $(xinput list --id-only 'AT Translated Set 2 keyboard') -option ctrl:swapcaps -option altwin:swap_lalt_lwin dvorak
+
+bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86MonBrightnessUp exec "brightnessctl s +5%"
+bindsym XF86MonBrightnessDown exec "brightnessctl s 5%-"
+
+bindsym $mod+semicolon exec i3-input -F "exec i3-msg %s" -P 'i3-msg '
+
+# focus between monitors
+bindsym $mod+l focus output right
+bindsym $mod+b focus output down
+
+# move between monitors
+bindsym $mod+$mod2+l move to output right
+bindsym $mod+$mod2+b move to output down
+
+# move workspace
+bindsym $mod+$mod2+$mod3+l move workspace to output right
+bindsym $mod+$mod2+$mod3+b move workspace to output down
+
+# i3ext
+bindsym $mod+Left exec i3ext rotate left
+bindsym $mod+Right exec i3ext rotate right
+bindsym $mod+$mod2+Left exec i3ext push left
+bindsym $mod+$mod2+Right exec i3ext push right
+bindsym $mod+u exec i3ext split
+
+# resize toplevel containers
+bindsym $mod+z exec i3-input -F "exec i3ext resize %s" -P 'i3ext resize '
+bindsym $mod+$mod2+z exec i3-input -F "exec i3-msg [floating] resize set %s" -P 'i3-msg [floating] resize set '
+
+# bindings for attaching to/detaching from an external monitor
+bindsym $mod+$mod2+a exec \
+    export INTERNAL=$(xrandr | grep -o 'eDP[^ ]*') && \
+    export EXTERNAL=$(xrandr | grep -oP '^(?!eDP)[^ ]*(?= connected)') && \
+	i3-msg 'workspace 0' && \
+	xrandr --output $INTERNAL --mode 2560x1440 --output $EXTERNAL --auto --primary --above $INTERNAL && \
+	sleep 1 && \
+	i3-msg '[workspace="^[^0]"] move workspace to output primary'
+bindsym $mod+$mod2+d exec xrandr --output $(xrandr | grep -oP '^(?!eDP)[^ ]*(?= connected)') --off
+
+# change focus
+bindsym $mod+comma focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+period focus right
+
+# move focused window
+bindsym $mod+$mod2+comma move left
+bindsym $mod+$mod2+j move down
+bindsym $mod+$mod2+k move up
+bindsym $mod+$mod2+period move right
+
+bindsym $mod+p scratchpad show
+bindsym $mod+$mod2+p move scratchpad
 
 # Rename current window
 bindsym $mod+n exec i3-input -F "title_format %s"
 
+# Rename current workspace
+bindsym $mod+$mod2+n exec NUM=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).name' | cut -d':' -f1) && i3-input -F "rename workspace to $NUM:%s"
+
 # Take screenshot and copy to clipboard
-bindsym --release $mod+Control+Shift+4 exec --no-startup-id ~/.config/i3/screenshot.sh
+bindsym --release Print exec --no-startup-id ~/.config/i3/screenshot.sh
 
 # Disable window titlebars always
 for_window [class=".*"] border pixel 2
@@ -28,10 +92,12 @@ client.focused          #f58b54 #f58b54 #ffffff #ffffff   #f58b54
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $mod2 Shift
+set $mod3 Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:monospace 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -50,140 +116,81 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+# start a browser
+bindsym $mod+minus exec firefox
+
 # kill focused window
-bindsym $mod+w kill
+bindsym $mod+$mod2+w kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+space exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-# change focus
-bindsym $mod+comma focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+period focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-# move focused window
-bindsym $mod+Mod1+comma move left
-bindsym $mod+Mod1+j move down
-bindsym $mod+Mod1+k move up
-bindsym $mod+Mod1+period move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Mod1+Left move left
-bindsym $mod+Mod1+Down move down
-bindsym $mod+Mod1+Up move up
-bindsym $mod+Mod1+Right move right
-
-# split in horizontal orientation
-bindsym $mod+h split h
-
-# split in vertical orientation
-bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
+bindsym $mod+$mod2+s split vertical; layout stacking
 bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+$mod2+t split horizontal; layout tabbed
+
+bindsym $mod+h layout splith
+bindsym $mod+$mod2+h split horizontal
+bindsym $mod+v layout splitv
+bindsym $mod+$mod2+v split vertical
 
 # toggle tiling / floating
-bindsym $mod+Mod1+space floating toggle
+bindsym $mod+$mod2+BackSpace floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+BackSpace focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
 
 # focus the child container
-bindsym $mod+m focus child
-
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+bindsym $mod+i focus child
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 0
 
 # move focused container to workspace
-bindsym $mod+Mod1+1 move container to workspace $ws1
-bindsym $mod+Mod1+2 move container to workspace $ws2
-bindsym $mod+Mod1+3 move container to workspace $ws3
-bindsym $mod+Mod1+4 move container to workspace $ws4
-bindsym $mod+Mod1+5 move container to workspace $ws5
-bindsym $mod+Mod1+6 move container to workspace $ws6
-bindsym $mod+Mod1+7 move container to workspace $ws7
-bindsym $mod+Mod1+8 move container to workspace $ws8
-bindsym $mod+Mod1+9 move container to workspace $ws9
-bindsym $mod+Mod1+0 move container to workspace $ws10
+bindsym $mod+$mod2+1 move container to workspace number 1
+bindsym $mod+$mod2+2 move container to workspace number 2
+bindsym $mod+$mod2+3 move container to workspace number 3
+bindsym $mod+$mod2+4 move container to workspace number 4
+bindsym $mod+$mod2+5 move container to workspace number 5
+bindsym $mod+$mod2+6 move container to workspace number 6
+bindsym $mod+$mod2+7 move container to workspace number 7
+bindsym $mod+$mod2+8 move container to workspace number 8
+bindsym $mod+$mod2+9 move container to workspace number 9
+bindsym $mod+$mod2+0 move container to workspace number 0
 
 # reload the configuration file
-bindsym $mod+Mod1+c reload
+bindsym $mod+$mod2+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Mod1+r restart
+bindsym $mod+$mod2+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Mod1+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym Comma resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym Period resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-
-bindsym $mod+r mode "resize"
+bindsym $mod+$mod2+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+$mod2+$mod3+e exec i3-msg exit
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
 	position top
         status_command i3status
+	tray_output primary
 }
