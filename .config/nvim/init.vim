@@ -37,3 +37,5 @@ cnoremap <M-f> <S-Right>
 
 autocmd FileType yaml setlocal sts=2 expandtab sw=2
 autocmd FileType json setlocal sts=2 expandtab sw=2
+autocmd FileType html setlocal expandtab sw=2 sts=-1
+autocmd FileType ts setlocal expandtab sw=2 sts=-1
