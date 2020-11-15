@@ -11,14 +11,8 @@ set grepformat^=%f:%l:%c:%m
 "LSP Client configuration
 lua << EOF
 local nvim_lsp = require'nvim_lsp'
-nvim_lsp.rls.setup{
-  cmd = { "/usr/local/google/home/gongt/fuchsia/prebuilt/third_party/rust/linux-x64/bin/rls" }
-}
-nvim_lsp.gopls.setup{
-  cmd = { "/usr/local/google/home/gongt/go/bin/gopls" }
-}
-nvim_lsp.clangd.setup{
-  cmd = { "clangd", "--compile-commands-dir", "out/default" }
+nvim_lsp.pyls.setup{
+  cmd = { "pyls" }
 }
 local function do_nothing(_, _, _, _)
 end
