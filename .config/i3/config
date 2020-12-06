@@ -21,8 +21,8 @@ bindsym $mod+l exec i3ext swap right
 bindsym $mod+z exec i3-input -F "exec i3ext resize %s"
 
 # variables for xrandr output names
-set $builtin_display eDP-1
-set $external_display DP-1
+set $builtin_display eDP-1-1
+set $external_display DP-1-1
 
 # bindings for attaching to/detaching from an external monitor
 bindsym $mod+$mod2+a exec \
