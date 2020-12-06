@@ -1,5 +1,6 @@
 alias ll='ls -l'
 alias cfg='git --work-tree ~/ --git-dir ~/.cfg'
+alias vi='nvim'
 # Set up the prompt
 
 autoload -Uz promptinit
