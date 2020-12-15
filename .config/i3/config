@@ -5,6 +5,17 @@
 # this file and re-run i3-config-wizard(1).
 #
 
+# variables for xrandr output names
+set $builtin_display eDP-1
+set $external_display DP-1
+
+# bindings for attaching to/detaching from an external monitor
+bindsym $mod+Mod1+a exec \
+	xrandr --output $builtin_display --mode 2560x1440 --output $external_display --auto --primary --right-of $builtin_display && \
+	sleep 1 && \
+	i3-msg '[workspace="^[1-9]$"] move workspace to output primary'
+bindsym $mod+Mod1+d exec xrandr --output $external_display --off
+
 bindsym $mod+Mod1+h move workspace to output left
 
 bindsym $mod+Mod1+minus move scratchpad
