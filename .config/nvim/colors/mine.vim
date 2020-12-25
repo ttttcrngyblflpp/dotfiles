@@ -62,6 +62,8 @@ hi Todo term=standout ctermfg=0 ctermbg=3 guifg=Blue guibg=Yellow
 " Language-specific stuff
 hi rustModPath ctermfg=NONE
 
+hi Pmenu ctermfg=White ctermbg=Black
+
 " 0 8  black
 " 1 9  red
 " 2 10 green
