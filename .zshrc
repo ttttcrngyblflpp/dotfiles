@@ -1,3 +1,7 @@
+function chpwd() {
+  export WD=$(basename $PWD)
+}
+
 alias ll='ls -l'
 alias cfg='git --work-tree ~/ --git-dir ~/.cfg'
 alias vi='nvim'
