@@ -19,6 +19,11 @@ Xft.antialias: 1
 ! text subpixel rendering, one of: none, rgb, bgr, vrgb, vbgr
 Xft.rgba: rgb
 
+! xterm copy/paste keybindings
+xterm.vt100.translations: #override \n\
+    Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\
+    Ctrl Shift <Key>V: insert-selection(CLIPBOARD)
+
 ! xterm font
 xterm*faceName: Hack
 xterm*faceSize: 9
