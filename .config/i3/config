@@ -18,10 +18,10 @@ set $external_display DP-1
 
 # bindings for attaching to/detaching from an external monitor
 bindsym $mod+Mod1+a exec \
-	i3-msg 'workspace 10' && \
+	i3-msg 'workspace 0' && \
 	xrandr --output $builtin_display --mode 2560x1440 --output $external_display --auto --primary --right-of $builtin_display && \
 	sleep 1 && \
-	i3-msg '[workspace="^[1-9]$"] move workspace to output primary'
+	i3-msg '[workspace="^[^0]"] move workspace to output primary'
 bindsym $mod+Mod1+d exec xrandr --output $external_display --off
 
 bindsym $mod+Mod1+h move workspace to output left
@@ -73,6 +73,10 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+
+# start a browser
+bindsym $mod+Tab exec firefox
+
 
 # kill focused window
 bindsym $mod+w kill
@@ -144,7 +148,7 @@ bindsym $mod+6 workspace number 6
 bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
+bindsym $mod+0 workspace number 0
 
 # move focused container to workspace
 bindsym $mod+Mod1+1 move container to workspace number 1
@@ -156,7 +160,7 @@ bindsym $mod+Mod1+6 move container to workspace number 6
 bindsym $mod+Mod1+7 move container to workspace number 7
 bindsym $mod+Mod1+8 move container to workspace number 8
 bindsym $mod+Mod1+9 move container to workspace number 9
-bindsym $mod+Mod1+0 move container to workspace number 10
+bindsym $mod+Mod1+0 move container to workspace number 0
 
 # reload the configuration file
 bindsym $mod+Mod1+c reload
