@@ -5,6 +5,10 @@
 # this file and re-run i3-config-wizard(1).
 #
 
+# lock
+bindsym $mod+Mod1+l exec i3lock -c 000000
+bindsym $mod+Mod1+shift+l exec "i3lock -c 000000; sleep 5; xset dpms force off"
+
 # swap toplevel containers
 bindsym $mod+Mod1+o exec i3ext swap left
 bindsym $mod+Mod1+u exec i3ext swap right
