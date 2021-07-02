@@ -18,12 +18,14 @@ nvim_lsp.rust_analyzer.setup{}
 local function do_nothing(_, _, _, _)
 end
 
-vim.lsp.callbacks["textDocument/publishDiagnostics"] = do_nothing
+vim.lsp.handlers["textDocument/publishDiagnostics"] = do_nothing
 EOF
 
 nnoremap <silent> <Leader>d <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> <Leader>] <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+
+nnoremap <silent> zq zz16<C-E>
 
 cnoremap <C-A> <Home>
 cnoremap <C-F> <Right>
