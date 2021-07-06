@@ -5,6 +5,8 @@
 # this file and re-run i3-config-wizard(1).
 #
 
+bindsym $mod+i exec i3-input -F "exec i3-msg %s"
+
 # lock
 bindsym $mod+Mod1+l exec i3lock -c 000000
 bindsym $mod+Mod1+shift+l exec "i3lock -c 000000; sleep 5; xset dpms force off"
@@ -32,6 +34,7 @@ bindsym $mod+Mod1+h move workspace to output left
 
 bindsym $mod+Mod1+minus move scratchpad
 bindsym $mod+minus scratchpad show
+bindsym $mod+shift+minus exec i3-input -F "exec i3-msg [floating] resize set %s"
 
 # Rename current window
 bindsym $mod+n exec i3-input -F "title_format %s"
