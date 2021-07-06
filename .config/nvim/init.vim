@@ -73,3 +73,4 @@ autocmd FileType json setlocal sts=2 expandtab sw=2
 autocmd FileType html setlocal expandtab sw=2 sts=-1
 autocmd FileType ts setlocal expandtab sw=2 sts=-1
 autocmd FileType markdown setlocal tw=100
+autocmd FileType bo setlocal sts=4 expandtab sw=4
