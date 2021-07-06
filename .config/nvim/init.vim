@@ -1,6 +1,41 @@
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
-source ~/.vim/vimrc
+
+" start of original vimrc
+set nocompatible
+
+filetype plugin indent on
+syntax on
+
+set cmdheight=2
+set completeopt-=preview
+set completeopt+=menuone
+set hidden
+set number
+set relativenumber
+
+" XXX remove me
+color mine
+
+call plug#begin('~/.config/nvim/plugged')
+Plug 'jlanzarotta/bufexplorer'
+Plug 'rust-lang/rust.vim'
+"Plug 'lifepillar/vim-mucomplete'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'neovim/nvim-lspconfig'
+call plug#end()
+
+" bufexplorer options
+" show relative paths by default
+let g:bufExplorerShowRelativePath = 1
+
+command! -bang -nargs=? -complete=dir F call fzf#vim#files(search_dirs, <bang>0)
+command! -nargs=* -complete=dir H
+  \ call fzf#run({'sink': 'e', 'source': 'rg --files --hidden --no-ignore <args>', 'down': '40%'})
+nnoremap <silent> <c-p> :F<CR>
+
+" end of original vimrc
 
 set guicursor=
 set noincsearch
@@ -10,11 +45,11 @@ set grepformat^=%f:%l:%c:%m
 
 "LSP Client configuration
 lua << EOF
-local nvim_lsp = require'nvim_lsp'
-nvim_lsp.pyls.setup{
+require'lspconfig'.pyls.setup{
   cmd = { "pyls" }
 }
-nvim_lsp.rust_analyzer.setup{}
+require'lspconfig'.rust_analyzer.setup{}
+
 local function do_nothing(_, _, _, _)
 end
 
