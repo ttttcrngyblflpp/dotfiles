@@ -30,10 +30,9 @@ call plug#end()
 " show relative paths by default
 let g:bufExplorerShowRelativePath = 1
 
-command! -bang -nargs=? -complete=dir F call fzf#vim#files(search_dirs, <bang>0)
 command! -nargs=* -complete=dir H
   \ call fzf#run({'sink': 'e', 'source': 'rg --files --hidden --no-ignore <args>', 'down': '40%'})
-nnoremap <silent> <c-p> :F<CR>
+nnoremap <silent> <c-p> :Files<CR>
 
 " end of original vimrc
 
