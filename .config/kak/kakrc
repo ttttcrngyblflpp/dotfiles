@@ -1,18 +1,20 @@
+define-command erc "e %val{config}/kakrc"
+
 addhl global/ number-lines -relative
 
-map global normal <space> ,
-map global normal , <space>
-map global user <semicolon> '<a-;>'
-
-map global insert <c-w> '<esc><a-b><a-c>'
-map global insert <c-u> '<esc>h<a-h><a-c>'
-
-source "%val{config}/plugins/plug.kak/rc/plug.kak"
+evaluate-commands %sh{
+    plugins="$kak_config/plugins"
+    mkdir -p "$plugins"
+    [ ! -e "$plugins/plug.kak" ] && \
+        git clone -q https://github.com/andreyorst/plug.kak.git "$plugins/plug.kak"
+    printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
+}
 plug "andreyorst/plug.kak" noload
 
 plug "andreyorst/fzf.kak" config %{
-    map global normal <c-p> ': fzf-mode<ret>'
-} defer fzf %{
+    map global normal <c-p> %{: fzf-mode<ret>}
+    map global normal <c-q> %{: fzf -fzf-impl %{FZF_DEFAULT_COMMAND='rg --files -uu' fzf}<ret>}
+} defer fzf-file %{
     set-option global fzf_file_command 'rg'
 }
 
@@ -20,6 +22,30 @@ plug "kak-lsp/kak-lsp" do %{
     cargo install --locked --force --path .
 }
 lsp-enable
+
+set-option global grepcmd 'rg -n --column'
+
+map global normal <space> ,
+map global normal , <space>
+map global user <semicolon> '<a-;>'
+
+define-command -hidden ctrl-u 'exec -draft h<a-h><a-c>'
+define-command -hidden ctrl-k 'exec -draft <a-l><a-c>'
+define-command -hidden ctrl-w 'exec -draft h<a-b><a-c>'
+map global insert <c-u> '<a-;>: ctrl-u<ret>'
+map global insert <c-k> '<a-;>: ctrl-k<ret>'
+map global insert <c-w> '<a-;>: ctrl-w<ret>'
+map global insert <c-b> '<a-;>h'
+map global insert <c-f> '<a-;>l'
+map global insert <c-a> '<a-;>gi'
+map global insert <c-e> '<a-;>gl<a-;>l'
+map global insert <a-b> '<a-;>b'
+map global insert <a-f> '<a-;>w<a-;>l'
+
+define-command -params 1 -client-completion show-on %{
+    evaluate-commands -client %arg{1} e %val{buffile} %val{cursor_line} %val{cursor_column}
+}
+alias global s show-on
 
 map global user a '<a-a>'
 map global user b '<a-b>'
