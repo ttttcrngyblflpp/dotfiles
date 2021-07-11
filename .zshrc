@@ -1,3 +1,4 @@
+export WD=$(basename $PWD)
 function chpwd() {
   export WD=$(basename $PWD)
 }
