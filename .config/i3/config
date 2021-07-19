@@ -11,6 +11,8 @@ bindsym $mod+i exec i3-input -F "exec i3-msg %s"
 bindsym $mod+Mod1+l exec i3lock -c 000000
 bindsym $mod+Mod1+shift+l exec "i3lock -c 000000; sleep 5; xset dpms force off"
 
+bindsym $mod+Mod1+v exec setxkbmap -device $(xinput list --id-only 'AT Translated Set 2 keyboard') -option ctrl:swapcaps -option altwin:swap_lalt_lwin dvorak
+
 # swap toplevel containers
 bindsym $mod+Mod1+o exec i3ext swap left
 bindsym $mod+Mod1+u exec i3ext swap right
