@@ -28,7 +28,7 @@ xterm.vt100.translations: #override \n\
 
 ! xterm font
 xterm*faceName: Hack
-xterm*faceSize: 9
+xterm*faceSize: 8.5
 xterm*boldFont: Hack-bold
 xterm*boldColors: false
 
