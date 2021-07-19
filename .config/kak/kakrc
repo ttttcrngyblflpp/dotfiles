@@ -47,11 +47,12 @@ plug "andreyorst/kaktree" config %{
         rmhl buffer/show-whitespaces
     }
     kaktree-enable
+    map global user t %{: kaktree-toggle<ret>}
 }
 
 plug "andreyorst/fzf.kak" config %{
-    map global normal <c-p> %{: fzf-mode<ret>}
-    map global normal <c-q> %{: fzf -fzf-impl %{FZF_DEFAULT_COMMAND='rg --files -uu' fzf}<ret>}
+    map global user p %{: fzf-mode<ret>}
+    map global user P %{: fzf -fzf-impl %{FZF_DEFAULT_COMMAND='rg --files -uu' fzf}<ret>}
 } defer fzf-file %{
     set-option global fzf_file_command 'rg'
 } defer fzf %{
@@ -59,10 +60,15 @@ plug "andreyorst/fzf.kak" config %{
     set-option global fzf_preview_pos 'up'
 }
 
+plug "delapouite/kakoune-buffers" config %{
+    map global user b ': enter-buffers-mode<ret>'
+    map global user B ': enter-user-mode -lock buffers<ret>'
+}
+
 plug "kak-lsp/kak-lsp" do %{
     cargo install --locked --force --path .
 } config %{
-    map global normal <c-l> %{: enter-user-mode lsp<ret>}
+    map global user l %{: enter-user-mode lsp<ret>}
 
     set-option global lsp_cmd %sh{
         if [[ $PWD == /google/src/cloud/gongt/* ]]
@@ -107,80 +113,3 @@ define-command -params 1 -client-completion -override swap-with %{
     }
 }
 alias global sw swap-with
-
-map global user a '<a-a>'
-map global user b '<a-b>'
-map global user c '<a-c>'
-map global user d '<a-d>'
-map global user e '<a-e>'
-map global user f '<a-f>'
-map global user g '<a-g>'
-map global user h '<a-h>'
-map global user i '<a-i>'
-map global user j '<a-j>'
-map global user k '<a-k>'
-map global user l '<a-l>'
-map global user m '<a-m>'
-map global user n '<a-n>'
-map global user o '<a-o>'
-map global user p '<a-p>'
-map global user q '<a-q>'
-map global user r '<a-r>'
-map global user s '<a-s>'
-map global user t '<a-t>'
-map global user u '<a-u>'
-map global user v '<a-v>'
-map global user w '<a-w>'
-map global user x '<a-x>'
-map global user y '<a-y>'
-map global user z '<a-z>'
-map global user A '<a-A>'
-map global user B '<a-B>'
-map global user C '<a-C>'
-map global user D '<a-D>'
-map global user E '<a-E>'
-map global user F '<a-F>'
-map global user G '<a-G>'
-map global user H '<a-H>'
-map global user I '<a-I>'
-map global user J '<a-J>'
-map global user K '<a-K>'
-map global user L '<a-L>'
-map global user M '<a-M>'
-map global user N '<a-N>'
-map global user O '<a-O>'
-map global user P '<a-P>'
-map global user Q '<a-Q>'
-map global user R '<a-R>'
-map global user S '<a-S>'
-map global user T '<a-T>'
-map global user U '<a-U>'
-map global user V '<a-V>'
-map global user W '<a-W>'
-map global user X '<a-X>'
-map global user Y '<a-Y>'
-map global user Z '<a-Z>'
-
-map global user ! '<a-!>'
-map global user $ '<a-$>'
-map global user | '<a-|>'
-map global user & '<a-&>'
-map global user @ '<a-@>'
-map global user * '<a-*>'
-map global user / '<a-/>'
-map global user ? '<a-?>'
-map global user [ '<a-[>'
-map global user ] '<a-]>'
-map global user ( '<a-(>'
-map global user ) '<a-)>'
-map global user { '<a-{>'
-map global user } '<a-}>'
-map global user ` '<a-`>'
-map global user ~ '<a-~>'
-map global user , '<a-,>'
-map global user . '<a-.>'
-map global user : '<a-:>'
-map global user ^ '<a-^>'
-map global user _ '<a-_>'
-map global user = '<a-=>'
-map global user + '<a-+>'
