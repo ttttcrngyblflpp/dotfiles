@@ -1,5 +1,3 @@
-define-command edit-rc "e %val{config}/kakrc"
-alias global erc edit-rc
 define-command -override eval-selection %{eval %reg[.]}
 alias global es eval-selection
 
@@ -51,8 +49,8 @@ plug "andreyorst/kaktree" config %{
 }
 
 plug "andreyorst/fzf.kak" config %{
-    map global user p %{: fzf-mode<ret>}
-    map global user P %{: fzf -fzf-impl %{FZF_DEFAULT_COMMAND='rg --files -uu' fzf}<ret>}
+    map global user f %{: fzf-mode<ret>}
+    map global user F %{: fzf -fzf-impl %{FZF_DEFAULT_COMMAND='rg --files -uu' fzf} -kak-cmd %{edit -existing}<ret>}
 } defer fzf-file %{
     set-option global fzf_file_command 'rg'
 } defer fzf %{
