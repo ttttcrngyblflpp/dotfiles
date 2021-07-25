@@ -6,6 +6,10 @@ addhl global/ wrap
 
 set-option global grepcmd 'rg -n --column'
 
+hook global ModuleLoaded tmux %{
+    alias global terminal tmux-terminal-window
+}
+
 hook global BufOpenFile .* editorconfig-load
 hook global BufNewFile .* editorconfig-load
 
@@ -21,6 +25,14 @@ hook global WinSetOption filetype=rust %{
     set-face window variable default
 }
 
+def -override ranger %{
+    terminal sh -c "
+        ranger --choosefiles /tmp/kak_%val{client_pid}_ranger $(dirname %val{buffile})
+        kak -p %val{session} <<<""eval -client %val{client} $(sed 's/^/edit /' /tmp/kak_%val{client_pid}_ranger)""
+    "
+}
+map global user r ': ranger<ret>' -docstring 'select files in ranger'
+
 evaluate-commands %sh{
     plugins="$kak_config/plugins"
     mkdir -p "$plugins"
@@ -35,17 +47,6 @@ plug "andreyorst/smarttab.kak" defer smarttab %{
 } config %{
     hook global WinSetOption filetype=.* expandtab
     hook global WinSetOption filetype=go smarttab
-}
-
-plug "andreyorst/kaktree" config %{
-    hook global WinSetOption filetype=kaktree %{
-        rmhl buffer/numbers
-        rmhl buffer/matching
-        rmhl buffer/wrap
-        rmhl buffer/show-whitespaces
-    }
-    kaktree-enable
-    map -docstring 'kaktree' global user t %{: kaktree-toggle<ret>}
 }
 
 plug "andreyorst/fzf.kak" config %{
