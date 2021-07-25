@@ -45,12 +45,12 @@ plug "andreyorst/kaktree" config %{
         rmhl buffer/show-whitespaces
     }
     kaktree-enable
-    map global user t %{: kaktree-toggle<ret>}
+    map -docstring 'kaktree' global user t %{: kaktree-toggle<ret>}
 }
 
 plug "andreyorst/fzf.kak" config %{
-    map global user f %{: fzf-mode<ret>}
-    map global user F %{: fzf -fzf-impl %{FZF_DEFAULT_COMMAND='rg --files -uu' fzf} -kak-cmd %{edit -existing}<ret>}
+    map -docstring 'fzf-mode' global user f %{: fzf-mode<ret>}
+    map -docstring 'fzf hidden' global user F %{: fzf -fzf-impl %{FZF_DEFAULT_COMMAND='rg --files -uu' fzf} -kak-cmd %{edit -existing}<ret>}
 } defer fzf-file %{
     set-option global fzf_file_command 'rg'
 } defer fzf %{
@@ -59,14 +59,14 @@ plug "andreyorst/fzf.kak" config %{
 }
 
 plug "delapouite/kakoune-buffers" config %{
-    map global user b ': enter-buffers-mode<ret>'
-    map global user B ': enter-user-mode -lock buffers<ret>'
+    map -docstring 'buffers' global user b ': enter-buffers-mode<ret>'
+    map -docstring 'buffers locked' global user B ': enter-user-mode -lock buffers<ret>'
 }
 
 plug "kak-lsp/kak-lsp" do %{
     cargo install --locked --force --path .
 } config %{
-    map global user l %{: enter-user-mode lsp<ret>}
+    map -docstring 'lsp' global user l %{: enter-user-mode lsp<ret>}
 
     set-option global lsp_cmd %sh{
         if [[ $PWD == /google/src/cloud/gongt/* ]]
@@ -78,10 +78,6 @@ plug "kak-lsp/kak-lsp" do %{
     }
 }
 lsp-enable
-
-map global normal <space> ,
-map global normal , <space>
-map global user <semicolon> '<a-;>'
 
 define-command -hidden ctrl-u 'exec -draft hGi<a-c>'
 define-command -hidden ctrl-k 'exec -draft <a-l><a-c>'
