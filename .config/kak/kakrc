@@ -27,7 +27,7 @@ hook global WinSetOption filetype=rust %{
 
 def -override ranger %{
     terminal sh -c "
-        ranger --choosefiles /tmp/kak_%val{client_pid}_ranger $(dirname %val{buffile})
+        ranger --choosefiles /tmp/kak_%val{client_pid}_ranger --selectfile %val{buffile}
         kak -p %val{session} <<<""eval -client %val{client} $(sed 's/^/edit /' /tmp/kak_%val{client_pid}_ranger)""
     "
 }
