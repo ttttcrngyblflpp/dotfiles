@@ -64,3 +64,5 @@ export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 eval "$(direnv hook zsh)"
 
 compdef -d git
+
+export REPLAYS="/srv/games/lutris/battlenet/drive_c/users/tone/Documents/StarCraft II/Accounts/820163038/1-S2-1-12304596/Replays/Multiplayer"

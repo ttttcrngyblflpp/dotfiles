@@ -59,8 +59,8 @@ bindsym $mod+z exec i3-input -F "exec i3ext resize-all %s" -P 'i3ext resize-all 
 bindsym $mod+$mod2+z exec i3-input -F "exec i3-msg [floating] resize set %s" -P 'i3-msg [floating] resize set '
 
 # bindings for attaching to/detaching from an external monitor
-bindsym $mod+$mod2+a nop
-bindsym $mod+$mod2+d nop
+bindsym $mod+$mod2+a exec xrandr --output DP-4 --mode 5120x1440 --rate 240 --primary --output DP-2 --off
+bindsym $mod+$mod3+a exec xrandr --output DP-2 --mode 5120x1440 --rate 240 --primary --output DP-4 --off
 
 # change focus
 bindsym $mod+comma focus left
@@ -130,7 +130,7 @@ bindsym $mod+$mod2+grave [workspace="__focused__"] split vertical; [workspace="_
 bindsym $mod+Tab open
 
 # start a browser
-bindsym $mod+Escape exec chromium
+bindsym $mod+Escape exec google-chrome-stable
 
 bindsym $mod+equal focus mode_toggle
 bindsym $mod+$mod2+equal floating toggle
