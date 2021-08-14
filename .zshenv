@@ -15,3 +15,5 @@ prepend_path ~/.local/bin
 
 export EDITOR=kak
 export PAGER='less -FQ'
+
+export SC2_DIR='/srv/games/lutris/battlenet/drive_c/users/tone/Documents/StarCraft II/Accounts/820163038/1-S2-1-12304596/Replays/Multiplayer'
