@@ -57,8 +57,7 @@ bindsym $mod+z exec i3-input -F "exec i3ext resize %s" -P 'i3ext resize '
 bindsym $mod+$mod2+z exec i3-input -F "exec i3-msg [floating] resize set %s" -P 'i3-msg [floating] resize set '
 
 # bindings for attaching to/detaching from an external monitor
-bindsym $mod+$mod2+a nop
-bindsym $mod+$mod2+d nop
+bindsym $mod+$mod2+a exec xrandr --output DP-4 --mode 5120x1440 --rate 240 --primary
 
 # change focus
 bindsym $mod+comma focus left

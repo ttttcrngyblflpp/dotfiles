@@ -59,3 +59,5 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+
+export REPLAYS="/srv/games/lutris/battlenet/drive_c/users/tone/Documents/StarCraft II/Accounts/820163038/1-S2-1-12304596/Replays/Multiplayer"
