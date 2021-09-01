@@ -1,8 +1,33 @@
+# Configuration to configure things better
 define-command -override eval-selection %{eval %reg[.]}
 alias global es eval-selection
 
-addhl global/ number-lines -relative
-addhl global/ wrap
+# Fundamentally broken editing features
+map -docstring line global object l '<esc>gi<a-l>'
+
+define-command -hidden ctrl-u 'exec -draft hGi<a-c>'
+define-command -hidden ctrl-k 'exec -draft <a-l><a-c>'
+define-command -hidden ctrl-w 'exec -draft b<a-c>'
+map global insert <c-q> '<esc>'
+map global insert <c-u> '<a-;>: ctrl-u<ret>'
+map global insert <c-k> '<a-;>: ctrl-k<ret>'
+map global insert <c-w> '<a-;>: ctrl-w<ret>'
+map global insert <c-b> '<a-;>h'
+map global insert <c-f> '<a-;>l'
+map global insert <c-a> '<a-;>gi'
+map global insert <c-e> '<a-;>gl<a-;>l'
+map global insert <a-b> '<a-;>b'
+map global insert <a-f> '<a-;>w<a-;>l'
+
+map global normal / '/(?S)'
+map global normal ? '?(?S)'
+map global normal <a-/> '<a-/>(?S)'
+map global normal <a-?> '<a-?>(?S)'
+
+# Highlighters
+add-highlighter global/ number-lines -relative
+add-highlighter global/ wrap
+add-highlighter global/trailing-whitespcae regex '\h+$' 0:Error
 
 set-option global grepcmd 'rg -n --column'
 
@@ -80,20 +105,6 @@ plug "kak-lsp/kak-lsp" do %{
 }
 lsp-enable
 
-define-command -hidden ctrl-u 'exec -draft hGi<a-c>'
-define-command -hidden ctrl-k 'exec -draft <a-l><a-c>'
-define-command -hidden ctrl-w 'exec -draft b<a-c>'
-map global insert <c-q> '<esc>'
-map global insert <c-u> '<a-;>: ctrl-u<ret>'
-map global insert <c-k> '<a-;>: ctrl-k<ret>'
-map global insert <c-w> '<a-;>: ctrl-w<ret>'
-map global insert <c-b> '<a-;>h'
-map global insert <c-f> '<a-;>l'
-map global insert <c-a> '<a-;>gi'
-map global insert <c-e> '<a-;>gl<a-;>l'
-map global insert <a-b> '<a-;>b'
-map global insert <a-f> '<a-;>w<a-;>l'
-
 define-command -params 1 -client-completion show-on %{
     evaluate-commands -client %arg{1} e %val{buffile} %val{cursor_line} %val{cursor_column}
 }
@@ -108,3 +119,10 @@ define-command -params 1 -client-completion -override swap-with %{
     }
 }
 alias global sw swap-with
+
+define-command -params 1 -override send-to %{
+    nop %sh{
+        kak -p $1 <<<"set-register h '"$(sed "s/'/''/g" <<<"$kak_reg_dot")"'"
+    }
+}
+alias global st send-to
