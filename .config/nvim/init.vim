@@ -17,14 +17,14 @@ set relativenumber
 " XXX remove me
 color mine
 
-call plug#begin('~/.config/nvim/plugged')
-Plug 'jlanzarotta/bufexplorer'
-Plug 'rust-lang/rust.vim'
-"Plug 'lifepillar/vim-mucomplete'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'neovim/nvim-lspconfig'
-call plug#end()
+"call plug#begin('~/.config/nvim/plugged')
+"Plug 'jlanzarotta/bufexplorer'
+"Plug 'rust-lang/rust.vim'
+""Plug 'lifepillar/vim-mucomplete'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
+"Plug 'neovim/nvim-lspconfig'
+"call plug#end()
 
 " bufexplorer options
 " show relative paths by default
@@ -44,10 +44,10 @@ set grepformat^=%f:%l:%c:%m
 
 "LSP Client configuration
 lua << EOF
-require'lspconfig'.pyls.setup{
-  cmd = { "pyls" }
-}
-require'lspconfig'.rust_analyzer.setup{}
+--require'lspconfig'.pyls.setup{
+--  cmd = { "pyls" }
+--}
+--require'lspconfig'.rust_analyzer.setup{}
 
 local function do_nothing(_, _, _, _)
 end

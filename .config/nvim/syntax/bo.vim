@@ -20,15 +20,18 @@ syn keyword upgrade concussive shells
 
 syn keyword other ebay armory turret bunker sensor tower
 
+syn match exclam "\!"
+
 let b:current_syntax = "bo"
 
-hi units ctermfg=1
+hi exclam ctermfg=1
 hi gas ctermfg=2
 hi production ctermfg=3
 hi addon ctermfg=3
 hi supply ctermfg=4
 hi upgrade ctermfg=5
-hi other ctermfg=6
+hi other ctermfg=5
+hi units ctermfg=6
 
 
 " 0 8  black
