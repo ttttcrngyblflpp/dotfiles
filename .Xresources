@@ -70,5 +70,5 @@ xterm*metaSendsEscape: true
 *.color14:      #66cccc
 
 ! white
-*.color7:       #dddddd
+*.color7:       #cccccc
 *.color15:      #ffffff
