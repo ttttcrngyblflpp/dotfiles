@@ -20,11 +20,11 @@ tmux new-window -d -t "$SESSION" -n rg
 tmux new-window -d -t "$SESSION" -n build
 tmux new-window -d -t "$SESSION" -n test
 tmux new-window -d -t "$SESSION" -n run
+tmux new-window -d -t "$SESSION" -n log
 tmux new-window -d -t "$SESSION" -n vcs
-tmux new-window -d -t "$SESSION" -n docker
+tmux new-window -d -t "$SESSION" -n misc
 
-tmux send-keys -t "$SESSION:docker" "kak -d -s $SESSION" Enter
-tmux send-keys -t "$SESSION:kak" "kak -c $SESSION -e 'rename-client c1'" Enter
+tmux send-keys -t "$SESSION:kak" "kak -s $SESSION -e 'rename-client c1'" Enter
 tmux send-keys -t "$SESSION:kak-2" "kak -c $SESSION -e 'rename-client c2'" Enter
 tmux send-keys -t "$SESSION:kak-3" "kak -c $SESSION -e 'rename-client c3'" Enter
 
