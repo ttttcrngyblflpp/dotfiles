@@ -1,5 +1,6 @@
 # Changelog
 # 1. Comment out RLS lines and uncomment rust-analyzer
+# 2. Changed timeout from 1800 to 0
 #
 snippet_support = false
 verbosity = 2
@@ -8,7 +9,7 @@ verbosity = 2
 # exit session if no requests were received during given period in seconds
 # works only in unix sockets mode (-s/--session)
 # set to 0 to disable
-timeout = 1800 # seconds = 30 minutes
+timeout = 0 # seconds = 30 minutes
 
 [language.bash]
 filetypes = ["sh"]
