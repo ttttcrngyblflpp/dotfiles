@@ -7,7 +7,8 @@ map -docstring line global object l '<esc>gi<a-l>'
 
 define-command -hidden ctrl-u 'exec -draft hGi<a-c>'
 define-command -hidden ctrl-k 'exec -draft <a-l><a-c>'
-define-command -hidden ctrl-w 'exec -draft b<a-c>'
+define-command -hidden ctrl-w 'exec -draft h<a-B><a-c>'
+
 map global insert <c-q> '<esc>'
 map global insert <c-u> '<a-;>: ctrl-u<ret>'
 map global insert <c-k> '<a-;>: ctrl-k<ret>'
