@@ -76,7 +76,7 @@ bindsym $mod+$mod2+n exec NUM=$(i3-msg -t get_workspaces | jq -r '.[] | select(.
 bindsym --release Print exec --no-startup-id ~/.config/i3/screenshot.sh
 
 # Disable window titlebars always
-for_window [class=".*"] border pixel 2
+default_border pixel 1
 
 # Set a gaps of 10 (outer gaps is unset because it's added to this)
 gaps inner 10
