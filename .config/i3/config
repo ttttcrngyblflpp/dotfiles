@@ -48,14 +48,8 @@ bindsym $mod+z exec i3-input -F "exec i3ext resize %s" -P 'i3ext resize '
 bindsym $mod+$mod2+z exec i3-input -F "exec i3-msg [floating] resize set %s" -P 'i3-msg [floating] resize set '
 
 # bindings for attaching to/detaching from an external monitor
-bindsym $mod+$mod2+a exec \
-    export INTERNAL=$(xrandr | grep -o 'eDP[^ ]*') && \
-    export EXTERNAL=$(xrandr | grep -oP '^(?!eDP)[^ ]*(?= connected)') && \
-	i3-msg 'workspace 0' && \
-	xrandr --output $INTERNAL --mode 2560x1440 --output $EXTERNAL --auto --primary --above $INTERNAL && \
-	sleep 1 && \
-	i3-msg '[workspace="^[^0]"] move workspace to output primary'
-bindsym $mod+$mod2+d exec xrandr --output $(xrandr | grep -oP '^(?!eDP)[^ ]*(?= connected)') --off
+bindsym $mod+$mod2+a nop
+bindsym $mod+$mod2+d nop
 
 # change focus
 bindsym $mod+comma focus left
