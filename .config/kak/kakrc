@@ -1,5 +1,5 @@
 # Configuration to configure things better
-define-command -override eval-selection %{eval %reg[.]}
+define-command eval-selection %{eval %reg[.]}
 alias global es eval-selection
 
 # Fundamentally broken editing features
@@ -7,7 +7,7 @@ map -docstring line global object l '<esc>gi<a-l>'
 
 define-command -hidden ctrl-u 'exec -draft hGi<a-c>'
 define-command -hidden ctrl-k 'exec -draft <a-l><a-c>'
-define-command -hidden ctrl-w 'exec -draft h<a-B><a-c>'
+define-command -hidden ctrl-w 'exec -draft hB<a-c>'
 
 map global insert <c-q> '<esc>'
 map global insert <c-u> '<a-;>: ctrl-u<ret>'
@@ -51,7 +51,7 @@ hook global WinSetOption filetype=rust %{
     set-face window variable default
 }
 
-def -override ranger %{
+def ranger %{
     terminal sh -c "
         ranger --choosefiles /tmp/kak_%val{client_pid}_ranger --selectfile %val{buffile}
         kak -p %val{session} <<<""eval -client %val{client} $(sed 's/^/edit /' /tmp/kak_%val{client_pid}_ranger)""
@@ -111,7 +111,7 @@ define-command -params 1 -client-completion show-on %{
 }
 alias global so show-on
 
-define-command -params 1 -client-completion -override swap-with %{
+define-command -params 1 -client-completion swap-with %{
     nop %sh{
         # kak is grabbing mouse events and preventing copy/paste
         kak -p $kak_session <<< "\
@@ -121,7 +121,7 @@ define-command -params 1 -client-completion -override swap-with %{
 }
 alias global sw swap-with
 
-define-command -params 1 -override send-to %{
+define-command -params 1 send-to %{
     nop %sh{
         kak -p $1 <<<"set-register h '"$(sed "s/'/''/g" <<<"$kak_reg_dot")"'"
     }
