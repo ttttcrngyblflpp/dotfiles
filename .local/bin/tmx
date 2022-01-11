@@ -7,7 +7,7 @@ if tmux has-session -t "$SESSION" 2>/dev/null; then
     exit 0
 fi
 
-if grep "$SESSION" <(kak -l); then
+if grep "^$SESSION$" <(kak -l); then
     echo "kak session already exists, close it first"
     exit 0
 fi
