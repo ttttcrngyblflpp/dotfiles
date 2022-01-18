@@ -14,15 +14,15 @@ fi
 
 
 tmux new-session -d -s "$SESSION" -n kak
-tmux new-window -d -t "$SESSION" -n kak-2
-tmux new-window -d -t "$SESSION" -n kak-3
-tmux new-window -d -t "$SESSION" -n rg
-tmux new-window -d -t "$SESSION" -n build
-tmux new-window -d -t "$SESSION" -n test
-tmux new-window -d -t "$SESSION" -n run
-tmux new-window -d -t "$SESSION" -n log
-tmux new-window -d -t "$SESSION" -n vcs
-tmux new-window -d -t "$SESSION" -n misc
+tmux new-window -d -t "$SESSION": -n kak-2
+tmux new-window -d -t "$SESSION": -n kak-3
+tmux new-window -d -t "$SESSION": -n rg
+tmux new-window -d -t "$SESSION": -n build
+tmux new-window -d -t "$SESSION": -n test
+tmux new-window -d -t "$SESSION": -n run
+tmux new-window -d -t "$SESSION": -n log
+tmux new-window -d -t "$SESSION": -n vcs
+tmux new-window -d -t "$SESSION": -n misc
 
 tmux send-keys -t "$SESSION:kak" "kak -s $SESSION -e 'rename-client c1'" Enter
 tmux send-keys -t "$SESSION:kak-2" "kak -c $SESSION -e 'rename-client c2'" Enter
