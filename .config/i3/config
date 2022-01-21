@@ -112,6 +112,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+$mod2+Return [workspace="__focused__"] split vertical; [workspace="__focused__"] layout stacking
 
 # start a browser
 bindsym $mod+minus exec firefox
