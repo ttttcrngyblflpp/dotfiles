@@ -51,6 +51,13 @@ hook global WinSetOption filetype=rust %{
     set-face window variable default
 }
 
+declare-user-mode grep
+map global user g ': enter-user-mode grep<ret>' -docstring 'grep'
+map global grep n ': grep-next-match<ret>' -docstring 'grep-next-match'
+map global grep p ': grep-previous-match<ret>' -docstring 'grep-previous-match'
+map global grep . ': lsp-next-location *goto*<ret>' -docstring 'lsp-next-location *goto*'
+map global grep , ': lsp-previous-location *goto*<ret>' -docstring 'lsp-previous-location *goto*'
+
 def ranger %{
     terminal sh -c "
         ranger --choosefiles /tmp/kak_%val{client_pid}_ranger --selectfile %val{buffile}
@@ -127,3 +134,10 @@ define-command -params 1 send-to %{
     }
 }
 alias global st send-to
+
+define-command write-tmp %(
+    nop %sh(
+        echo -n "$kak_reg_dot" >/tmp/kak_"$kak_session"
+    )
+)
+alias global wt write-tmp
