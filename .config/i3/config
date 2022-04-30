@@ -39,10 +39,11 @@ bindsym $mod+$mod2+$mod3+b move workspace to output down
 # i3ext
 bindsym $mod+Right exec i3ext swap right
 bindsym $mod+Left exec i3ext swap left
-bindsym $mod+$mod2+Right focus parent; focus parent; open; focus left; focus parent; move right; focus right; kill
-bindsym $mod+$mod2+Left exec "i3-msg 'focus parent; focus parent; open' && i3ext swap left && i3-msg 'focus right; focus parent; move left; focus left; kill'"
-bindsym $mod+$mod2+$mod3+Right exec i3ext rotate right
-bindsym $mod+$mod2+$mod3+Left exec i3ext rotate left
+bindsym $mod+$mod2+Right exec i3ext rotate right
+bindsym $mod+$mod2+Left exec i3ext rotate left
+
+bindsym $mod+u focus parent; focus parent; open; focus left; focus parent; move right; focus right; kill
+bindsym $mod+e exec "i3-msg 'focus parent; focus parent; open' && i3ext swap left && i3-msg 'focus right; focus parent; move left; focus left; kill'"
 
 # resize toplevel containers
 bindsym $mod+z exec i3-input -F "exec i3ext resize %s" -P 'i3ext resize '
@@ -183,8 +184,6 @@ bindsym $mod+$mod2+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+$mod2+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+$mod2+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+$mod2+$mod3+e exec i3-msg exit
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
