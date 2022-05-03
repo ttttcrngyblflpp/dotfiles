@@ -20,3 +20,4 @@ fi
 export npm_config_prefix=$HOME/.node_modules
 
 export EDITOR=kak
+export PAGER='less -FQ'
