@@ -11,10 +11,11 @@ general {
         interval = 5
 }
 
-order += "run_watch sc2remap"
 order += "ipv6"
 order += "wireless _first_"
 order += "ethernet _first_"
+order += "run_watch sc2remap"
+order += "battery all"
 order += "disk /"
 order += "load"
 order += "memory"
@@ -33,6 +34,10 @@ wireless _first_ {
 ethernet _first_ {
         format_up = "E: %ip (%speed)"
         format_down = "E: down"
+}
+
+battery all {
+    format = "%status %percentage %remaining"
 }
 
 disk "/" {
