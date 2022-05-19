@@ -15,6 +15,7 @@ prompt adam1
 setopt histignorealldups
 unsetopt LIST_BEEP
 unsetopt HIST_BEEP
+unsetopt BEEP
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
