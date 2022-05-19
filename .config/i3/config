@@ -42,9 +42,6 @@ bindsym $mod+Left exec i3ext swap left
 bindsym $mod+$mod2+Right exec i3ext rotate right
 bindsym $mod+$mod2+Left exec i3ext rotate left
 
-bindsym $mod+u focus parent; focus parent; open; focus left; focus parent; move right; focus right; kill
-bindsym $mod+e exec "i3-msg 'focus parent; focus parent; open' && i3ext swap left && i3-msg 'focus right; focus parent; move left; focus left; kill'"
-
 # resize toplevel containers
 bindsym $mod+z exec i3-input -F "exec i3ext resize %s" -P 'i3ext resize '
 bindsym $mod+$mod2+z exec i3-input -F "exec i3-msg [floating] resize set %s" -P 'i3-msg [floating] resize set '
