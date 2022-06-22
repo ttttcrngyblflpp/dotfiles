@@ -44,6 +44,8 @@ bindsym $mod+$mod2+Left resize shrink left 1 px or 2 ppt
 
 # resize toplevel containers
 bindsym $mod+c exec i3ext center
+bindsym $mod+r exec i3ext center right
+bindsym $mod+g exec i3ext center left
 bindsym $mod+z exec i3-input -F "exec i3ext resize %s" -P 'i3ext resize '
 bindsym $mod+$mod2+z exec i3-input -F "exec i3-msg [floating] resize set %s" -P 'i3-msg [floating] resize set '
 
