@@ -65,8 +65,8 @@ bindsym $mod+$mod2+j move down
 bindsym $mod+$mod2+k move up
 bindsym $mod+$mod2+period move right
 
-bindsym $mod+p scratchpad show
-bindsym $mod+$mod2+p move scratchpad
+bindsym $mod+d scratchpad show
+bindsym $mod+$mod2+d move scratchpad
 
 # Rename current window
 bindsym $mod+n exec i3-input -F "title_format %s"
