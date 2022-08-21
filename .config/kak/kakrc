@@ -25,6 +25,17 @@ map global normal ? '?(?S)'
 map global normal <a-/> '<a-/>(?S)'
 map global normal <a-?> '<a-?>(?S)'
 
+# Case conversion
+define-command snakecase -override %{
+    exec '<a-:><a-;>Z;`zs-|[a-z][A-Z]<ret>;a<space><esc>s[-\s]+<ret>c_<esc><a-i>w`'
+}
+define-command camelcase %{
+    exec '`s[-_<space>]<ret>d~<a-i>w'
+}
+define-command kebabcase %{
+    exec '<a-:><a-;>s_|[a-z][A-Z]<ret>;a<space><esc>s[_\s]+<ret>c-<esc><a-i>w`'
+}
+
 # Highlighters
 add-highlighter global/ number-lines -relative
 add-highlighter global/ wrap
@@ -46,6 +57,8 @@ hook global WinSetOption filetype=rust %{
     set-face window function default+fg
     set-face window variable default
 }
+
+set-option global disabled_hooks go-insert-closing-delimiter
 
 declare-user-mode grep
 map global user g ': enter-user-mode grep<ret>' -docstring 'grep'
@@ -93,6 +106,9 @@ plug "delapouite/kakoune-buffers" config %{
     map -docstring 'buffers locked' global user B ': enter-user-mode -lock buffers<ret>'
 }
 
+plug "delapouite/kakoune-registers"
+
+
 plug "kak-lsp/kak-lsp" do %{
     cargo install --locked --force --path .
 } config %{
@@ -137,3 +153,31 @@ define-command write-tmp %(
     )
 )
 alias global wt write-tmp
+
+define-command -params 2.. -docstring %{
+    send-selection-to-session-register <register> <session>: assign the current selection to the given register of the target session
+} -shell-script-candidates %{
+    case "$kak_token_to_complete" in
+        0) printf 'arobase\ncaret\ncolon\ndot\ndquote\nhash\npercent\npipe\nslash\nunderscore\n';;
+        1)
+            if [ -n "${XDG_RUNTIME_DIR}" ]; then
+                ls -1 "${XDG_RUNTIME_DIR}"/kakoune/
+            else
+                ls -1 "${TMPDIR:-/tmp}"/kakoune-"${USER}"/
+            fi
+            ;;
+    esac
+} send-selection-to-session-register %{
+    evaluate-commands -save-regs m %{
+        execute-keys \"my
+        edit -scratch
+        execute-keys \"m<a-R>
+
+        try %{
+            execute-keys -draft s "'" <ret> yP
+        }
+        execute-keys i " '" <esc> a "'" <esc> gg i "reg %arg{1} " <esc> <percent>
+        execute-keys <a-|> " kak -p %arg{2}" <ret>
+        delete-buffer
+    }
+}
