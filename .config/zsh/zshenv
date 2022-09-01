@@ -1,22 +1,15 @@
-if ! grep ~/.local/bin <<<":$PATH:" >/dev/null
-then
-	export PATH=~/.local/bin:$PATH
-fi
+prepend_path () {
+    if ! grep $1 <<<"$PATH" >/dev/null
+    then
+    	export PATH=$1:$PATH
+    fi
+}
 
-if ! grep ~/.cargo/bin <<<":$PATH:" >/dev/null
-then
-        export PATH=~/.cargo/bin:$PATH
-fi
+prepend_path ~/.local/bin
+prepend_path ~/.cargo/bin
+prepend_path ~/go/bin
 
-if ! grep ~/go/bin <<<":$PATH:" >/dev/null
-then
-    export PATH=~/go/bin:$PATH
-fi
-
-if ! grep ~/.node_modules/bin <<<":$PATH:" >/dev/null
-then
-	export PATH=~/.node_modules/bin:$PATH
-fi
+prepend_path ~/.node_modules/bin
 export npm_config_prefix=$HOME/.node_modules
 
 export EDITOR=kak
