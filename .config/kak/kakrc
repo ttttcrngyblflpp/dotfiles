@@ -47,8 +47,14 @@ hook global ModuleLoaded tmux %{
     alias global terminal tmux-terminal-window
 }
 
-hook global BufOpenFile .* editorconfig-load
-hook global BufNewFile .* editorconfig-load
+hook global BufOpenFile .* %{
+    editorconfig-load
+    autoconfigtab
+}
+hook global BufNewFile .* %{
+    editorconfig-load
+    autoconfigtab
+}
 
 map global normal = '|fmt -w $kak_opt_autowrap_column<ret>'
 
@@ -58,7 +64,7 @@ hook global WinSetOption filetype=rust %{
     set-face window variable default
 }
 
-set-option global disabled_hooks go-insert-closing-delimiter
+set-option global disabled_hooks go-closing-delimiter-insert
 
 declare-user-mode grep
 map global user g ': enter-user-mode grep<ret>' -docstring 'grep'
