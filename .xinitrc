@@ -6,4 +6,6 @@ setxkbmap -device $(xinput list --id-only 'AT Translated Set 2 keyboard') -layou
 #xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
 
+xset r rate 130 100
+
 exec i3
