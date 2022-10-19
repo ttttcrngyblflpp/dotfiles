@@ -116,8 +116,12 @@ floating_modifier $mod
 bindsym $mod+Return exec alacritty
 bindsym $mod+$mod2+Return [workspace="__focused__"] split vertical; [workspace="__focused__"] layout stacking
 
+# start a placeholder
+bindsym $mod+Tab open
+
 # start a browser
-bindsym $mod+minus exec firefox
+bindsym $mod+minus exec chromium
+bindsym $mod+$mod2+minus exec chromium --incognito
 
 # kill focused window
 bindsym $mod+$mod2+w kill
