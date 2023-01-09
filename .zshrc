@@ -48,4 +48,4 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 export FZF_DEFAULT_COMMAND='rg --files'
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
