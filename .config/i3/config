@@ -39,8 +39,8 @@ bindsym $mod+$mod2+$mod3+b move workspace to output down
 # resize window
 bindsym $mod+Right resize grow right 1 px or 2 ppt
 bindsym $mod+Left resize grow left 1 px or 2 ppt
-bindsym $mod+$mod2+Right resize shrink right 1 px or 2 ppt
-bindsym $mod+$mod2+Left resize shrink left 1 px or 2 ppt
+bindsym $mod+Down resize shrink right 1 px or 2 ppt
+bindsym $mod+Up resize shrink left 1 px or 2 ppt
 
 # resize toplevel containers
 bindsym $mod+c exec i3ext center
@@ -116,8 +116,8 @@ font pango:monospace 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
-bindsym $mod+$mod2+Return [workspace="__focused__"] split vertical; [workspace="__focused__"] layout stacking
+bindsym $mod+grave exec alacritty
+bindsym $mod+$mod2+grave [workspace="__focused__"] split vertical; [workspace="__focused__"] layout stacking
 
 # start a placeholder
 bindsym $mod+Tab open
@@ -149,12 +149,6 @@ bindsym $mod+h layout splith
 bindsym $mod+$mod2+h split horizontal
 bindsym $mod+v layout splitv
 bindsym $mod+$mod2+v split vertical
-
-# toggle tiling / floating
-bindsym $mod+$mod2+BackSpace floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+BackSpace focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
