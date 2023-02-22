@@ -222,10 +222,11 @@ intelephense.storagePath = "/tmp/intelephense"
 [language.python]
 filetypes = ["python"]
 roots = ["requirements.txt", "setup.py", ".git", ".hg"]
-command = "pyls"
-offset_encoding = "utf-8"
-workaround_server_sends_plaintext_labeled_as_markdown = true
-[language.python.settings]
+command = "pyright-langserver"
+args = ["--stdio"]
+#offset_encoding = "utf-8"
+#workaround_server_sends_plaintext_labeled_as_markdown = true
+#[language.python.settings]
 # See https://github.com/palantir/python-language-server#configuration
 # and https://github.com/palantir/python-language-server/blob/develop/vscode-client/package.json
 # "pyls.configurationSources" = ["flake8"]
