@@ -6,6 +6,9 @@ function chpwd() {
 alias ll='ls -l'
 alias cfg='git --work-tree ~/ --git-dir ~/.cfg'
 alias vi='nvim'
+lh() {
+    xinput set-prop ${1} 'libinput Left Handed Enabled' 1
+}
 # Set up the prompt
 
 autoload -Uz promptinit
