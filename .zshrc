@@ -9,6 +9,12 @@ alias vi='nvim'
 lh() {
     xinput set-prop ${1} 'libinput Left Handed Enabled' 1
 }
+rotate() {
+    cos=$(bc -l <<<"scale=6; c(${2}*a(1)/45)")
+    sin=$(bc -l <<<"scale=6; s(${2}*a(1)/45)")
+    negsin=$(bc -l <<<"scale=6; -s(${2}*a(1)/45)")
+    xinput set-prop ${1} 'Coordinate Transformation Matrix' $cos $sin 0 $negsin $cos 0 0 0 1
+}
 # Set up the prompt
 
 autoload -Uz promptinit
