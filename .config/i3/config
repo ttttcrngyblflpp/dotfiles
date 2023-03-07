@@ -122,6 +122,8 @@ bindsym $mod+Tab open
 # start a browser
 bindsym $mod+Escape exec chromium
 
+bindsym $mod+equal focus mode_toggle
+
 # kill focused window
 bindsym $mod+$mod2+w kill
 
