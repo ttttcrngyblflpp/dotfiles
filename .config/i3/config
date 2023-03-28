@@ -123,6 +123,7 @@ bindsym $mod+Tab open
 bindsym $mod+Escape exec chromium
 
 bindsym $mod+equal focus mode_toggle
+bindsym $mod+$mod2+equal floating toggle
 
 # kill focused window
 bindsym $mod+$mod2+w kill
