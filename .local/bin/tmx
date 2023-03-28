@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SESSION="$(basename $PWD)""$1"
+SESSION="$(basename "$PWD")""$1"
 
 if tmux has-session -t "$SESSION" 2>/dev/null; then
     echo "tmux session already exists, attach instead"
