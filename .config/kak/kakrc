@@ -81,7 +81,7 @@ map global grep , ': lsp-previous-location *goto*<ret>' -docstring 'lsp-previous
 
 def ranger %{
     terminal sh -c "
-        ranger --choosefiles /tmp/kak_%val{client_pid}_ranger --selectfile %val{buffile}
+        ranger --choosefiles /tmp/kak_%val{client_pid}_ranger --selectfile '%val{buffile}'
         kak -p %val{session} <<<""eval -client %val{client} $(sed 's/^/edit /' /tmp/kak_%val{client_pid}_ranger)""
     "
 }
