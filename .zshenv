@@ -5,12 +5,13 @@ prepend_path () {
     fi
 }
 
-prepend_path ~/.local/bin
 prepend_path ~/.cargo/bin
 prepend_path ~/go/bin
 
 prepend_path ~/.node_modules/bin
 export npm_config_prefix=$HOME/.node_modules
+
+prepend_path ~/.local/bin
 
 export EDITOR=kak
 export PAGER='less -FQ'
