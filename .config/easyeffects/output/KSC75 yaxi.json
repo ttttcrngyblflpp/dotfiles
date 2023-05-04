@@ -116,11 +116,11 @@
                     "type": "Hi-shelf"
                 },
                 "band8": {
-                    "frequency": 2828.0,
+                    "frequency": 3500.0,
                     "gain": -6.0,
                     "mode": "APO (DR)",
                     "mute": false,
-                    "q": 2.87,
+                    "q": 1.41,
                     "slope": "x1",
                     "solo": false,
                     "type": "Bell"
@@ -213,11 +213,11 @@
                     "type": "Hi-shelf"
                 },
                 "band8": {
-                    "frequency": 2828.0,
+                    "frequency": 3500.0,
                     "gain": -6.0,
                     "mode": "APO (DR)",
                     "mute": false,
-                    "q": 2.87,
+                    "q": 1.41,
                     "slope": "x1",
                     "solo": false,
                     "type": "Bell"
