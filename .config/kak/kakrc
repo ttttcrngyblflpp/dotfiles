@@ -79,11 +79,9 @@ map global grep p ': grep-previous-match<ret>' -docstring 'grep-previous-match'
 map global grep . ': lsp-next-location *goto*<ret>' -docstring 'lsp-next-location *goto*'
 map global grep , ': lsp-previous-location *goto*<ret>' -docstring 'lsp-previous-location *goto*'
 
-def ranger %{
-    terminal sh -c "
-        ranger --choosefiles /tmp/kak_%val{client_pid}_ranger --selectfile '%val{buffile}'
-        kak -p %val{session} <<<""eval -client %val{client} $(sed 's/^/edit /' /tmp/kak_%val{client_pid}_ranger)""
-    "
+def ranger -override %{
+    terminal ranger --choosefiles /tmp/kak_%val{client_pid}_ranger --selectfile '%val{buffile}'
+    edit "%sh( cat /tmp/kak_%val{client_pid}_ranger )"
 }
 map global user r ': ranger<ret>' -docstring 'select files in ranger'
 
