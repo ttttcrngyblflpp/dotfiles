@@ -79,9 +79,16 @@ map global grep p ': grep-previous-match<ret>' -docstring 'grep-previous-match'
 map global grep . ': lsp-next-location *goto*<ret>' -docstring 'lsp-next-location *goto*'
 map global grep , ': lsp-previous-location *goto*<ret>' -docstring 'lsp-previous-location *goto*'
 
-def ranger -override %{
-    terminal ranger --choosefiles /tmp/kak_%val{client_pid}_ranger --selectfile '%val{buffile}'
-    edit "%sh( cat /tmp/kak_%val{client_pid}_ranger )"
+# Note the argument to eval must be a string, which is single-quoted. Inside which the filename
+# argument may contain spaces, so it is double-quoted, but the " needs to be doubled due to
+# inside a "-string.
+def -override ranger %{
+    terminal sh -c "
+        ranger --choosefiles /tmp/kak_%val{client_pid}_ranger --selectfile '%val{buffile}'
+        kak -p %val{session} <<EOF
+        eval -client %val{client} 'edit ""$(cat /tmp/kak_%val{client_pid}_ranger)""'
+EOF
+    "
 }
 map global user r ': ranger<ret>' -docstring 'select files in ranger'
 
