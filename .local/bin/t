@@ -1,0 +1,3 @@
+#!/bin/bash
+
+todoist add -P 2313679494 "$@"
