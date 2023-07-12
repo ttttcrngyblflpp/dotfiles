@@ -28,7 +28,7 @@ map global normal <a-?> '<a-?>(?S)'
 # Case conversion
 define-command snakecase -override %{
     try %[
-        exec '<a-:><a-;>Z;`zs-|[a-z][A-Z]<ret>;a<space><esc>s[-\s]+<ret>c_<esc><a-i>w`'
+        exec '<a-:><a-;>Z;`zs-|[a-z0-9][A-Z]<ret>;a<space><esc>s[-\s]+<ret>c_<esc><a-i>w`'
     ]
 }
 define-command camelcase -override %{
