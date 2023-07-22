@@ -1,0 +1,34 @@
+#!/bin/bash
+
+API_TOKEN=7c5feb6ebad7e69e88050728437d8d4f
+
+seconds_worked=$(curl -s -u $API_TOKEN:api_token \
+    -H "Content-Type: application/json" \
+    -d '{"end_date":"2024-06-05","start_date":"2023-06-05"}' \
+    -X POST https://api.track.toggl.com/reports/api/v3/workspace/7344541/projects/192772782/summary | jq .seconds)
+
+
+days_off=$(wc -l <<EOF
+2023/06/05 Didn't start tracking till 06/06
+2023/06/19 Juneteenth
+2023/06/20 OOO
+2023/07/03 July 4th
+2023/07/04 July 4th
+EOF
+)
+
+days_since=$(( ($(date +%s)-$(date +%s -d 2023/06/05)) /60/60/24 + 1 ))
+weeks_since=$(( $days_since / 7 ))
+remainder=$(( $days_since % 7 ))
+if [ $remainder -ge 5 ]
+then
+    remainder_workday=5
+else
+    remainder_workday=$remainder
+fi
+
+daily_goal=18432 # 5.12 * 60 * 60
+goal_seconds=$(( ($weeks_since * 5 + $remainder_workday - $days_off) * $daily_goal ))
+
+echo $days_since $weeks_since $remainder_workday $seconds_worked $goal_seconds
+echo $(( ($seconds_worked - $goal_seconds) / 60 / 60))h$(( ($seconds_worked - $goal_seconds) / 60 % 60 ))m
