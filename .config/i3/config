@@ -126,6 +126,9 @@ bindsym $mod+Escape exec chromium
 bindsym $mod+equal focus mode_toggle
 bindsym $mod+$mod2+equal floating toggle
 
+bindsym F3 exec sleep 26 && notify-send -u critical STOP "right there criminal scum"
+bindsym F1 exec slow
+
 # kill focused window
 bindsym $mod+$mod2+w kill
 
