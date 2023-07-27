@@ -82,6 +82,19 @@ map global grep , ': lsp-previous-location *goto*<ret>' -docstring 'lsp-previous
 # Note the argument to eval must be a string, which is single-quoted. Inside which the filename
 # argument may contain spaces, so it is double-quoted, but the " needs to be doubled due to
 # inside a "-string.
+def -override lf %{
+    terminal sh -c "
+        lf -selection-path /tmp/kak_%val{client_pid}_lf '%val{buffile}'
+        kak -p %val{session} <<EOF
+        eval -client %val{client} 'edit ""$(cat /tmp/kak_%val{client_pid}_lf)""'
+EOF
+    "
+}
+map global user r ': lf<ret>' -docstring 'select files in lf'
+
+# Note the argument to eval must be a string, which is single-quoted. Inside which the filename
+# argument may contain spaces, so it is double-quoted, but the " needs to be doubled due to
+# inside a "-string.
 def -override ranger %{
     terminal sh -c "
         ranger --choosefiles /tmp/kak_%val{client_pid}_ranger --selectfile '%val{buffile}'
@@ -90,7 +103,6 @@ def -override ranger %{
 EOF
     "
 }
-map global user r ': ranger<ret>' -docstring 'select files in ranger'
 
 evaluate-commands %sh{
     plugins="$kak_config/plugins"
