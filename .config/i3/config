@@ -5,6 +5,10 @@
 # this file and re-run i3-config-wizard(1).
 #
 
+bindsym $mod+$mod2+o exec alacritty -e pulsemixer, exec easyeffects, exec alacritty --title terminal, exec discord
+bindsym $mod+$mod3+o exec chromium --new-window 1password.com, exec chromium --new-window calendar.google.com, exec chromium --new-window flowist.app, exec chromium --new-window
+bindsym $mod+o [title="pulsemixer"] mark a, [title="Easy Effects"] mark e, [title="terminal"] mark s, [title="Discord"] mark d, [title="1Password"] mark 1, [title="Calendar"] mark c, [title="Flowist"] mark t, [title="New Tab"] mark b, [con_mark="."] move scratchpad
+
 # lock
 bindsym $mod+$mod3+l exec i3lock -c 000000
 
