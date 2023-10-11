@@ -19,7 +19,6 @@ order += "battery all"
 order += "disk /"
 order += "load"
 order += "memory"
-order += "tztime local"
 
 run_watch sc2remap {
     pidfile = "/var/run/user/1001/sc2remap.pid"
