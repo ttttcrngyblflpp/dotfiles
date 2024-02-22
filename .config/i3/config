@@ -5,7 +5,7 @@
 # this file and re-run i3-config-wizard(1).
 #
 
-bindsym $mod+$mod2+o exec alacritty -e pulsemixer, exec easyeffects, exec alacritty --title terminal, exec discord
+bindsym $mod+$mod2+o exec alacritty -e pulsemixer, exec easyeffects, exec alacritty --title terminal
 bindsym $mod+$mod3+o exec wm o
 bindsym $mod+o exec wm m
 
@@ -19,6 +19,7 @@ bindsym $mod+$mod2+$mod3+a exec setxkbmap -device $(xinput list --id-only 'AT Tr
 
 bindsym $mod+$mod2+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 bindsym $mod+m exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+bindsym $mod+$mod3+m exec i3-input -F 'exec xinput set-prop pointer:Logitech\ USB\ Receiver libinput\ Accel\ Speed %s' -P 'mousesens: '
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
@@ -132,7 +133,7 @@ bindsym $mod+equal focus mode_toggle
 bindsym $mod+$mod2+equal floating toggle
 
 # This needs to be an external script because reloading i3 destroys SC2.
-bindsym F3 exec stop
+#bindsym F3 exec stop
 
 # kill focused window
 bindsym $mod+$mod2+w kill

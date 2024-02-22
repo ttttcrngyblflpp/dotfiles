@@ -4,20 +4,24 @@ case "$1" in
     "o")
         i3-msg 'exec chromium --new-window 1password.com;
         exec chromium --new-window calendar.google.com;
+        exec chromium --new-window discord.com/app;
         exec chromium --new-window gmail.com;
         exec chromium --new-window https://docs.google.com/document/d/1ah4sk7G8cbYfqY2XY7SKrmdkDkRtxBQuCEZRZs5TwKs/edit#heading=h.uo62m35jwu2c;
         exec chromium --new-window todoist.com;
+        exec chromium --new-window music.youtube.com;
         exec chromium --new-window'
         ;;
     "m")
         i3-msg '[title="pulsemixer"] mark a
         [title="New Tab"] mark b
         [title="Calendar"] mark c
+        [title="Discord"] mark d
         [title="Easy Effects"] mark e
-        [title="Mail"] mark m
+        [title="Gmail"] mark m
         [title="Notes"] mark n
         [title="terminal"] mark s
         [title="Todoist"] mark t
+        [title="Music"] mark y
         [title="1Password"] mark 1
         [con_mark="."] move scratchpad'
         ;;
