@@ -23,3 +23,5 @@ It's possible that the bare clone caused no tracking to be set up, if so run thi
 ```
 $ cfg config --add remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 ```
+
+Install `kakoune`, `fzf`, `ripgrep`, `lf`.
