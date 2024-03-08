@@ -45,8 +45,10 @@ bindsym $mod+$mod2+$mod3+b move workspace to output down
 
 # resize window
 bindsym $mod+Right resize grow right 1 px or 2 ppt
+bindsym $mod+$mod2+Right exec i3ext swap right
 bindsym $mod+Up resize shrink right 1 px or 2 ppt
 bindsym $mod+Left resize grow left 1 px or 2 ppt
+bindsym $mod+$mod2+Left exec i3ext swap left
 bindsym $mod+Down resize shrink left 1 px or 2 ppt
 
 # resize toplevel containers
