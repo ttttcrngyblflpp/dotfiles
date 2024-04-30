@@ -60,3 +60,5 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+
+eval "$(direnv hook zsh)"
