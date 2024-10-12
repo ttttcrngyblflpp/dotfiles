@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 case "$1" in
     "o")
         i3-msg 'exec chromium --new-window 1password.com;
@@ -24,5 +26,12 @@ case "$1" in
         [title="Music"] mark y
         [title="1Password"] mark 1
         [con_mark="."] move scratchpad'
+        ;;
+    "mo")
+        deg=$(bc -l <<<"$3*4*a(1)/180")
+        cos=$(bc -l <<<"c($deg)")
+        sin=$(bc -l <<<"s($deg)")
+        negsin=$(bc -l <<<"-s($deg)")
+        xinput set-prop "$2" "Coordinate Transformation Matrix" $cos $negsin 0 $sin $cos 0 0 0 1
         ;;
 esac
