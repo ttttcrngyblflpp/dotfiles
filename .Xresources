@@ -1,7 +1,7 @@
 xterm*termName: xterm-256color
 
 ! Set DPI for HiDPI screen
-Xft.dpi: 120
+Xft.dpi: 108
 
 ! text autohinting
 Xft.autohint: 0
