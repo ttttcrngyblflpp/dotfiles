@@ -32,6 +32,7 @@ case "$1" in
         cos=$(bc -l <<<"c($deg)")
         sin=$(bc -l <<<"s($deg)")
         negsin=$(bc -l <<<"-s($deg)")
-        xinput set-prop "$2" "Coordinate Transformation Matrix" $cos $negsin 0 $sin $cos 0 0 0 1
+        xinput set-prop pointer:Logitech\ USB\ Receiver "libinput Accel Speed" $2
+        xinput set-prop pointer:Logitech\ USB\ Receiver "Coordinate Transformation Matrix" $cos $negsin 0 $sin $cos 0 0 0 1
         ;;
 esac
