@@ -19,7 +19,7 @@ bindsym $mod+$mod2+$mod3+a exec setxkbmap -device $(xinput list --id-only 'AT Tr
 
 bindsym $mod+$mod2+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 bindsym $mod+m exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
-bindsym $mod+$mod3+m exec i3-input -F 'exec xinput set-prop pointer:Logitech\ USB\ Receiver libinput\ Accel\ Speed %s' -P 'mousesens: '
+bindsym $mod+$mod3+m exec i3-input -F 'exec wm mo %s' -P 'mousesens: '
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
