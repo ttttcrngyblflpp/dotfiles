@@ -25,6 +25,8 @@ map global normal ? '?(?S)'
 map global normal <a-/> '<a-/>(?S)'
 map global normal <a-?> '<a-?>(?S)'
 
+set global tabstop 3
+
 # Case conversion
 define-command snakecase -override %{
     try %[
