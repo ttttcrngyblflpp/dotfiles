@@ -11,7 +11,8 @@ case "$1" in
         exec chromium --new-window https://docs.google.com/document/d/1ah4sk7G8cbYfqY2XY7SKrmdkDkRtxBQuCEZRZs5TwKs/edit#heading=h.uo62m35jwu2c;
         exec chromium --new-window todoist.com;
         exec chromium --new-window music.youtube.com;
-        exec chromium --new-window'
+        exec chromium --new-window;
+        exec obsidian'
         ;;
     "m")
         i3-msg '[title="pulsemixer"] mark a
@@ -21,6 +22,7 @@ case "$1" in
         [title="Easy Effects"] mark e
         [title="Gmail"] mark m
         [title="Notes"] mark n
+        [title="obsidian"] mark o
         [title="terminal"] mark s
         [title="Todoist"] mark t
         [title="Music"] mark y
@@ -35,4 +37,14 @@ case "$1" in
         xinput set-prop pointer:Logitech\ USB\ Receiver "libinput Accel Speed" $2
         xinput set-prop pointer:Logitech\ USB\ Receiver "Coordinate Transformation Matrix" $cos $negsin 0 $sin $cos 0 0 0 1
         ;;
+    "s")
+        case "$2" in
+        "s")
+            import png:- | xclip -selection clipboard -t image/png
+        ;;
+        "")
+            import -window $(xdotool getactivewindow) png:- | xclip -selection clipboard -t image/png
+        ;;
+        esac
+    ;;
 esac

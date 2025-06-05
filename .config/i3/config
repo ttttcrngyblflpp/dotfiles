@@ -86,7 +86,8 @@ bindsym $mod+n exec i3-input -F "title_format %s"
 bindsym $mod+$mod2+n exec NUM=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).name' | cut -d':' -f1) && i3-input -F "rename workspace to $NUM:%s"
 
 # Take screenshot and copy to clipboard
-bindsym --release $mod+$mod2+$mod3+s exec --no-startup-id ~/.config/i3/screenshot.sh
+bindsym --release $mod+Delete exec --no-startup-id wm s
+bindsym --release $mod+$mod2+Delete exec --no-startup-id wm s s
 
 # Disable window titlebars always
 default_border pixel 1
