@@ -130,10 +130,21 @@
                     "solo": false,
                     "type": "Hi-shelf",
                     "width": 4.0
+                },
+                "band6": {
+                    "frequency": 3500.0,
+                    "gain": -3.0,
+                    "mode": "APO (DR)",
+                    "mute": false,
+                    "q": 0.7,
+                    "slope": "x1",
+                    "solo": false,
+                    "type": "Bell",
+                    "width": 4.0
                 }
             },
             "mode": "IIR",
-            "num-bands": 6,
+            "num-bands": 7,
             "output-gain": 0.0,
             "pitch-left": 0.0,
             "pitch-right": 0.0,
@@ -202,6 +213,17 @@
                     "slope": "x1",
                     "solo": false,
                     "type": "Hi-shelf",
+                    "width": 4.0
+                },
+                "band6": {
+                    "frequency": 3500.0,
+                    "gain": -3.0,
+                    "mode": "APO (DR)",
+                    "mute": false,
+                    "q": 0.7,
+                    "slope": "x1",
+                    "solo": false,
+                    "type": "Bell",
                     "width": 4.0
                 }
             },
