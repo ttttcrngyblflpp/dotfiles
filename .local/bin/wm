@@ -4,14 +4,14 @@ set -x
 
 case "$1" in
     "o")
-        i3-msg 'exec chromium --new-window 1password.com;
-        exec chromium --new-window calendar.google.com;
-        exec chromium --new-window discord.com/app;
-        exec chromium --new-window gmail.com;
-        exec chromium --new-window https://docs.google.com/document/d/1ah4sk7G8cbYfqY2XY7SKrmdkDkRtxBQuCEZRZs5TwKs/edit#heading=h.uo62m35jwu2c;
-        exec chromium --new-window todoist.com;
-        exec chromium --new-window music.youtube.com;
-        exec chromium --new-window;
+        i3-msg 'exec google-chrome-stable --new-window 1password.com;
+        exec google-chrome-stable --new-window calendar.google.com;
+        exec google-chrome-stable --new-window discord.com/app;
+        exec google-chrome-stable --new-window gmail.com;
+        exec google-chrome-stable --new-window https://docs.google.com/document/d/1ah4sk7G8cbYfqY2XY7SKrmdkDkRtxBQuCEZRZs5TwKs/edit#heading=h.uo62m35jwu2c;
+        exec google-chrome-stable --new-window todoist.com;
+        exec google-chrome-stable --new-window music.youtube.com;
+        exec google-chrome-stable --new-window;
         exec obsidian'
         ;;
     "m")
