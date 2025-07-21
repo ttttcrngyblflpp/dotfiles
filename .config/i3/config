@@ -15,8 +15,6 @@ bindsym $mod+$mod3+l exec i3lock -c 000000
 # suspend
 bindsym $mod+$mod3+s exec systemctl suspend
 
-bindsym $mod+$mod2+$mod3+a exec setxkbmap -device $(xinput list --id-only 'AT Translated Set 2 keyboard') -option ctrl:swapcaps -option altwin:swap_lalt_lwin dvorak
-
 bindsym $mod+$mod2+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 bindsym $mod+m exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 bindsym $mod+$mod3+m exec i3-input -F 'exec wm mo %s' -P 'mousesens: '
