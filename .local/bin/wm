@@ -8,7 +8,6 @@ case "$1" in
         exec google-chrome-stable --new-window calendar.google.com;
         exec google-chrome-stable --new-window discord.com/app;
         exec google-chrome-stable --new-window gmail.com;
-        exec google-chrome-stable --new-window https://docs.google.com/document/d/1ah4sk7G8cbYfqY2XY7SKrmdkDkRtxBQuCEZRZs5TwKs/edit#heading=h.uo62m35jwu2c;
         exec google-chrome-stable --new-window music.youtube.com;
         exec google-chrome-stable --new-window;
         exec obsidian'
@@ -20,7 +19,6 @@ case "$1" in
         [title="Discord"] mark d
         [title="Easy Effects"] mark e
         [title="Gmail"] mark m
-        [title="Notes"] mark n
         [title="obsidian"] mark o
         [title="terminal"] mark s
         [title="Music"] mark y
