@@ -2,12 +2,29 @@
 
 set -x
 
+apply_mouse_settings() {
+    local device_name="$1"
+    local angle="$2"
+    local accel="0"
+
+    # Calculate transformation matrix components
+    local deg=$(bc -l <<<"$angle*4*a(1)/180")
+    local cos=$(bc -l <<<"c($deg)")
+    local sin=$(bc -l <<<"s($deg)")
+    local negsin=$(bc -l <<<"-s($deg)")
+
+    # Apply settings
+    xinput set-prop "pointer:$device_name" "libinput Accel Speed" "$accel"
+    xinput set-prop "pointer:$device_name" "Coordinate Transformation Matrix" \
+        $cos $negsin 0 $sin $cos 0 0 0 1
+}
+
 case "$1" in
     "o")
         i3-msg 'exec google-chrome-stable --new-window 1password.com;
         exec google-chrome-stable --new-window calendar.google.com;
-        exec google-chrome-stable --new-window discord.com/app;
         exec google-chrome-stable --new-window gmail.com;
+        exec google-chrome-stable --new-window todoist.com;
         exec google-chrome-stable --new-window music.youtube.com;
         exec google-chrome-stable --new-window;
         exec obsidian'
@@ -16,24 +33,21 @@ case "$1" in
         i3-msg '[title="pulsemixer"] mark a
         [title="New Tab"] mark b
         [title="Calendar"] mark c
-        [title="Discord"] mark d
         [title="Easy Effects"] mark e
         [title="Gmail"] mark m
         [title="obsidian"] mark o
         [title="terminal"] mark s
+        [title="Todoist"] mark t
         [title="Music"] mark y
         [title="1Password"] mark 1
         [con_mark="."] move scratchpad'
         ;;
     "mo")
-        deg=$(bc -l <<<"$3*4*a(1)/180")
-        cos=$(bc -l <<<"c($deg)")
-        sin=$(bc -l <<<"s($deg)")
-        negsin=$(bc -l <<<"-s($deg)")
-        xinput set-prop pointer:Logitech\ USB\ Receiver "libinput Accel Speed" $2
-        xinput set-prop pointer:Logitech\ USB\ Receiver "Coordinate Transformation Matrix" $cos $negsin 0 $sin $cos 0 0 0 1
-        xinput set-prop pointer:OGM\ Wireless "libinput Accel Speed" $2
-        xinput set-prop pointer:OGM\ Wireless "Coordinate Transformation Matrix" $cos $negsin 0 $sin $cos 0 0 0 1
+        # Apply to Logitech
+        apply_mouse_settings "Logitech USB Receiver" -9
+
+        # Apply to Endgame Gear
+        apply_mouse_settings "Endgame Gear Endgame Gear OP1 8k v2 Gaming Mouse" -12
         ;;
     "s")
         case "$2" in
